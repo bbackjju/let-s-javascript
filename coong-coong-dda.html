@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>쿵쿵따게임</title>
+    </head>
+    <body>
+        <div>
+            <span id="order">1</span> 번째 참가자
+        </div>
+        <div>
+            <span>제시어: </span><span id="word"></span>
+        </div>
+        <input type="text"/>
+        <button>입력</button>
+    </body>
+    <script>
+        const number = Number(prompt('몇 명이 참가하나요?'))
+        if(number){
+            const $order = document.querySelector('#order')
+            const $word = document.querySelector('#word')
+            const $input = document.querySelector('input')
+            const $button = document.querySelector('button')
+            let word
+            let newWord
+
+            const input_word = () => {
+                if(newWord.length === 3 && (!word || word[word.length-1] === newWord[0])){
+                    const order = Number($order.textContent)
+                    word = newWord
+                    $word.textContent = word
+                    if(order + 1 > number){
+                        $order.textContent = 1
+                    }else{
+                        $order.textContent = order + 1
+                    }
+                }else{
+                    alert('글자수가 3글자가 아니거나 잘못된 글자를 입력했습니다!')
+                }
+                $input.value = ''
+                $input.focus()
+            }
+            
+            const onInput = (event) =>{
+                newWord = event.target.value
+            }
+
+            $button.addEventListener('click',input_word)
+            $input.addEventListener('input',onInput)
+        }
+    </script>
+</html>
