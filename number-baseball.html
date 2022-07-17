@@ -78,7 +78,8 @@
                 $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'))
             }
             if(out === 3){
-                $logs.append('패배')
+                const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`)
+                $logs.appendChild(message)
                 return
             }
             tries.push(value)
